@@ -34,7 +34,8 @@ function addTodoBox(title, id, done) {
      <div
        class=" border border-dark todo-box d-flex justify-content-between align-items-center px-2"
      >
-       <span onclick="done(${id})" class="${done && "done-task"}"> ${title} </span>
+     <input type="checkbox" onclick="toggleDone(${id})" ${done ? 'checked':''}>
+       <span onclick="toggleDone(${id})" class="${done && "done-task"}"> ${title} </span>
        <i onclick="deleteTask(${id})" class="material-icons">delete</i>
      </div>
    </div>`;
@@ -43,6 +44,12 @@ function addTodoBox(title, id, done) {
 function done(id){
   let task = ToDoList.find((i)=> i.id===id)
   task.done = true
+  read()
+}
+
+function toggleDone(id){
+  let task = ToDoList.find((i)=> i.id===id)
+  task.done = !task.done
   read()
 }
 
